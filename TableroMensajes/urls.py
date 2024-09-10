@@ -17,9 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-app_name = 'mensajes'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('mensajes/', include('mensajes.urls')),  # Incluir las URLs de la aplicación "mensajes"
+    path('', include('mensajes.urls')),  # Incluir las URLs de la aplicación "mensajes"
 ]

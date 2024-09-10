@@ -1,10 +1,11 @@
 from django.urls import path
-from . import views
+from mensajes import views
 
-nombreAplicacion = 'mensajes'
+app_name = 'mensajes'
 
 urlpatterns = [
-    path('mensajes/<str:tipo>/', views.verMensajes, name='verMensajes'),
+    path('', views.VerMensajesView.as_view(), name='verMensajes'),
     path('crear/', views.crearMensaje, name='crearMensaje'),
-    path('eliminar/<int:mensaje_id>/', views.eliminarMensaje, name='eliminarMensaje'),
+    path('eliminar/<int:mensaje_id>/', views.EliminarMensaje.as_view(), name='eliminarMensaje'),
+    path('usuario/', views.VerMensajesPorUsuarioView.as_view(), name='verMensajesUsuario'),  
 ]

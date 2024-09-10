@@ -9,6 +9,6 @@
     <form method="post">
         {% csrf_token %}
         <button type="submit">Eliminar</button>
-        <a href="{% url 'ver_mensajes' 'enviados' %}">Cancelar</a>
+        <a href="{% url 'mensajes:ver_mensajes' %}">Cancelar</a>
     </form>
 {% endblock %}

@@ -1,9 +1,16 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.views import View
 from .models import Mensaje
 from .forms import MensajeForm
 from django.contrib.auth.decorators import login_required
 
-@login_required
+
+class VerMensajesView(View):
+    def get(self,request):
+        mensajes = Mensaje.objects.all()
+        return render(request,'mensajes/verMensajes.html',{'mensajes':mensajes})
+    
+
 def verMensajes(request, tipo):
     if tipo == 'recibidos':
         mensajes = Mensaje.objects.filter(destinatario=request.user).order_by('-fecha_envio')
@@ -13,23 +20,36 @@ def verMensajes(request, tipo):
         mensajes = []
     return render(request, 'mensajes.html', {'mensajes': mensajes, 'tipo': tipo})
 
-@login_required
+
 def crearMensaje(request):
     if request.method == 'POST':
         form = MensajeForm(request.POST)
         if form.is_valid():
             mensaje = form.save(commit=False)
-            mensaje.remitente = request.user
             mensaje.save()
-            return redirect('ver_mensajes', tipo='enviados')
+            return redirect('mensajes:verMensajes')
     else:
         form = MensajeForm()
-    return render(request, 'crear_mensaje.html', {'form': form})
+    return render(request, 'mensajes/crearMensajes.html', {'form': form})
 
-@login_required
-def eliminarMensaje(request, mensaje_id):
-    mensaje = get_object_or_404(Mensaje, id=mensaje_id, remitente=request.user)
-    if request.method == 'POST':
-        mensaje.delete()
-        return redirect('ver_mensajes', tipo='enviados')
-    return render(request, 'eliminar_mensaje.html', {'mensaje': mensaje})
+
+class VerMensajesPorUsuarioView(View):
+    def get(self,request):
+        usuario = request.GET.get('usuario',None)
+
+        if usuario:
+            mensajes_recibidos = Mensaje.objects.filter(destinatario__icontains=usuario)
+            mensajes_enviados = Mensaje.objects.filter(remitente__icontains=usuario)
+
+        else:
+            return render(request, 'mensajes/verMensajesUsuario.html',{'mensajes_enviados':[],'mensajes_recibidos':[]})
+        
+        return render(request, 'mensajes/verMensajesUsuario.html',{'mensajes_enviados':mensajes_enviados,'mensajes_recibidos':mensajes_recibidos})
+        
+
+
+class EliminarMensaje(View):
+    def post(self, request, mensaje_id):
+        mensaje = get_object_or_404(Mensaje, pk=mensaje_id)
+        mensaje.delete() 
+        return redirect('mensajes:verMensajes') 
