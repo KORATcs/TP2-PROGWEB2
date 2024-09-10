@@ -1,8 +1,10 @@
 <img src="https://github.com/KORATcs/TP2-PROGWEB2/blob/4ddaea7b3f32fed94e34cc6ffd80dbec3f5344f7/Presentaci%C3%B3n%20Proyecto%20libreta%20Creativo%20Doodle%20Rosa.png" alt="logo">
 
-# Proyecto Django: Mensajes
+# Proyecto Django: Mensajes  
 
-Bienvenido al proyecto **Mensajes**, una aplicación web construida con Django que permite enviar y recibir mensajes de manera sencilla y eficiente.
+Bienvenido al proyecto **Mensajes**, una aplicación web construida con Django que permite enviar y recibir mensajes de manera sencilla y eficiente.  
+[Descargar Informe](https://github.com/KORATcs/TP2-PROGWEB2/blob/b91fa0b766cd85ebd426d483c4bf622e1648be3d/TP%202%20-%20PWII.pdf)  
+[Acceder a la Aplicación](http://127.0.0.1:8000)   
 
 ---
 
