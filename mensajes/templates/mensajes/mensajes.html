@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mensajes{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>{% block header %}Sistema de Mensajes{% endblock %}</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'ver_mensajes' 'recibidos' %}">Mensajes Recibidos</a></li>
+                <li><a href="{% url 'ver_mensajes' 'enviados' %}">Mensajes Enviados</a></li>
+                <li><a href="{% url 'crear_mensaje' %}">Crear Mensaje</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
