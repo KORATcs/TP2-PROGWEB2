@@ -13,8 +13,6 @@ Bienvenido al proyecto **Mensajes**, una aplicación web construida con Django q
 - [Instalación](#instalación)
 - [Configuración](#configuración)
 - [Uso](#uso)
-- [Contribuciones](#contribuciones)
-- [Licencia](#licencia)
 
 ---
 
