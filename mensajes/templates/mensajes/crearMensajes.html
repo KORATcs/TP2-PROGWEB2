@@ -2,11 +2,34 @@
 
 {% block title %}Crear Mensaje{% endblock %}
 
-{% block content %}
-    <h2>Crear Mensaje</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Enviar Mensaje</button>
-    </form>
+{% block content %} 
+    <div class="d-flex flex-column justify-content-center align-items-center" style="height: 80vh; margin-top: 20px;">
+        <div class="form-container w-100 mw-md-500 p-4 border rounded shadow bg-light">
+            <h2 class="text-center mb-4">Crear Mensaje</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary w-100">
+                    Enviar Mensaje
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <style>
+        textarea, input[type="text"] {
+            transition: border-color 0.3s; /* Transición suave para el cambio de color */
+        }
+
+        textarea:hover, input[type="text"]:hover {
+            border-color: white; /* Cambia el color del borde al pasar el cursor */
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Añade un efecto de sombra */
+        }
+
+        /* Establecer un tamaño fijo para la ventana */
+        html, body {
+            height: 100vh; /* Altura fija para la ventana */
+            overflow: hidden; /* Evita el desplazamiento */
+        }
+    </style>
 {% endblock %}

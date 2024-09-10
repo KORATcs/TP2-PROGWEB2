@@ -1,17 +1,17 @@
 {% extends 'mensajes/mensajes.html' %}
 
-
 {% block content %}
-    <h2>{% block header %}Lista de Mensajes{% endblock %}</h2>
-
     <div class="container">
         <ul class="list-group">
             {% for mensaje in mensajes %}
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <div>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="flex-grow-1">
                         <strong>De:</strong> {{ mensaje.remitente }}<br>
                         <strong>Para:</strong> {{ mensaje.destinatario }}<br>
-                        <span>{{ mensaje.texto }} ({{ mensaje.fecha_hora_envio }})</span>
+                        <span>{{ mensaje.texto }}</span>
+                    </div>
+                    <div class="text-end" style="min-width: 120px;">
+                        <small class="text-muted">{{ mensaje.fecha_hora_envio }}</small>
                     </div>
                     <form action="{% url 'mensajes:eliminarMensaje' mensaje.id %}" method="post" style="display:inline;">
                         {% csrf_token %}
@@ -23,6 +23,4 @@
             {% endfor %}
         </ul>
     </div>
-
-
 {% endblock %}

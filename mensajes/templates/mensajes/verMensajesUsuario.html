@@ -1,69 +1,66 @@
 {% extends 'mensajes/mensajes.html' %}
 
 {% block content %}
-    <h2>{% block header %}Lista de Mensajes por Usuario{% endblock %}</h2>
 
     <div class="container mt-5">
 
+        <!-- Formulario de búsqueda -->
         <form method="GET" action="{% url 'mensajes:verMensajesUsuario' %}" class="mb-4">
             <div class="input-group">
-                <input type="text" name="usuario" class="form-control" placeholder="Buscar por usuario">
+                <input type="text" name="usuario" class="form-control rounded mr-2" placeholder="Buscar por usuario" style="border-radius: 20px;">
                 <div class="input-group-append">
                     <button class="btn btn-primary" type="submit">Buscar</button>
                 </div>
             </div>
         </form>
     
-        <h1 class="text-center">
-            {% if usuario == '' %}
-                Mensajes Enviados por ...
-            {% else %}
-                Mensajes Enviados por {{ usuario }}
-            {% endif %} 
-        </h1>
+        <!-- Sección de mensajes -->
+        <div class="row">
+            <!-- Columna de Mensajes Enviados -->
+            <div class="col-md-6">
+                <h2>Mensajes Enviados</h2>
+                <ul class="list-group">
+                    {% for mensaje in mensajes_enviados %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>De:</strong> {{ mensaje.remitente }}<br>
+                                <strong>Para:</strong> {{ mensaje.destinatario }}<br>
+                                <span>{{ mensaje.texto }} ({{ mensaje.fecha_hora_envio }})</span>
+                            </div>
+                            <form action="{% url 'mensajes:eliminarMensaje' mensaje.id %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                            </form>
+                        </li>
+                    {% empty %}
+                        <li class="list-group-item">No tienes mensajes enviados.</li>
+                    {% endfor %}
+                </ul>
+            </div>
 
-        <h2>Mensajes Enviados</h2>
-        <div class="container">
-            <ul class="list-group">
-                {% for mensaje in mensajes_enviados %}
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <div>
-                            <strong>De:</strong> {{ mensaje.remitente }}<br>
-                            <strong>Para:</strong> {{ mensaje.destinatario }}<br>
-                            <span>{{ mensaje.texto }} ({{ mensaje.fecha_hora_envio }})</span>
-                        </div>
-                        <form action="{% url 'mensajes:eliminarMensaje' mensaje.id %}" method="post" style="display:inline;">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                        </form>
-                    </li>
-                {% empty %}
-                    <li class="list-group-item">No tienes mensajes {{ tipo }}.</li>
-                {% endfor %}
-            </ul>
+            <!-- Columna de Mensajes Recibidos -->
+            <div class="col-md-6">
+                <h2>Mensajes Recibidos</h2>
+                <ul class="list-group">
+                    {% for mensaje in mensajes_recibidos %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>De:</strong> {{ mensaje.remitente }}<br>
+                                <strong>Para:</strong> {{ mensaje.destinatario }}<br>
+                                <span>{{ mensaje.texto }} ({{ mensaje.fecha_hora_envio }})</span>
+                            </div>
+                            <form action="{% url 'mensajes:eliminarMensaje' mensaje.id %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                            </form>
+                        </li>
+                    {% empty %}
+                        <li class="list-group-item">No tienes mensajes recibidos.</li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
 
-        <h2>Mensajes Recibidos</h2>
-        <div class="container">
-            <ul class="list-group">
-                {% for mensaje in mensajes_recibidos %}
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <div>
-                            <strong>De:</strong> {{ mensaje.remitente }}<br>
-                            <strong>Para:</strong> {{ mensaje.destinatario }}<br>
-                            <span>{{ mensaje.texto }} ({{ mensaje.fecha_hora_envio }})</span>
-                        </div>
-                        <form action="{% url 'mensajes:eliminarMensaje' mensaje.id %}" method="post" style="display:inline;">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                        </form>
-                    </li>
-                {% empty %}
-                    <li class="list-group-item">No tienes mensajes {{ tipo }}.</li>
-                {% endfor %}
-            </ul>
-        </div>
-
-
+    </div>
 
 {% endblock %}
