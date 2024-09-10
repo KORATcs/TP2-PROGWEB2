@@ -3,7 +3,7 @@
 # Proyecto Django: Mensajes  
 
 Bienvenido al proyecto **Mensajes**, una aplicación web construida con Django que permite enviar y recibir mensajes de manera sencilla y eficiente.  
-[Descargar Informe](https://github.com/KORATcs/TP2-PROGWEB2/blob/b91fa0b766cd85ebd426d483c4bf622e1648be3d/TP%202%20-%20PWII.pdf)  
+[Descargar Informe](https://github.com/KORATcs/TP2-PROGWEB2/blob/8a00b39265409583ac8d1e2dd787587db6d52440/TP%202%20-%20PWII%20(1).pdf)  
 [Acceder a la Aplicación](http://127.0.0.1:8000)   
 
 ---
